@@ -1,0 +1,50 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    id 'java-gradle-plugin'
+    alias libs.plugins.kotlin.jvm
+    alias libs.plugins.anvil
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
+    }
+}
+
+dependencies {
+    implementation libs.build.android
+    implementation libs.build.kotlin
+    implementation libs.build.ksp
+    implementation libs.build.anvil
+}
+
+gradlePlugin {
+    plugins {
+        appPlugin {
+            id = "bandlab.buildbenchmark.app"
+            implementationClass = "bandlab.buildbenchmark.buildsrc.AppPlugin"
+            description = "The Gradle convention plugin for app modules."
+        }
+        androidLib {
+            id = "bandlab.buildbenchmark.androidlib"
+            implementationClass = "bandlab.buildbenchmark.buildsrc.AndroidLibrary"
+            description = "The Gradle convention plugin for Android library modules."
+        }
+        libPlugin {
+            id = "bandlab.buildbenchmark.lib"
+            implementationClass = "bandlab.buildbenchmark.buildsrc.LibraryPlugin"
+            description = "The Gradle convention plugin for library modules."
+        }
+        anvilPlugin {
+            id = "bandlab.buildbenchmark.anvil"
+            implementationClass = "bandlab.buildbenchmark.buildsrc.AnvilPlugin"
+            description = "The Gradle convention plugin for Anvil."
+        }
+    }
+}

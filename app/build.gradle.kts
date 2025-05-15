@@ -1,8 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.anvil)
+    id("bandlab.buildbenchmark.app")
 }
 
 android {
@@ -42,9 +39,13 @@ android {
 
 dependencies {
     implementation(project(":login"))
+    implementation(project(":toaster"))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.feature)
+
+    implementation(libs.dagger)
+    kapt(libs.daggerCompiler)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

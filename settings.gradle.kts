@@ -11,6 +11,18 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+plugins {
+    id("com.gradle.develocity") version "3.19.2" // Use the latest version
+}
+
+develocity {
+    buildScan {
+        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
+        termsOfUseAgree = "yes"
+    }
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -24,3 +36,4 @@ include(":app")
 include(":login")
 include(":login-api")
 include(":toaster")
+include(":infra")
