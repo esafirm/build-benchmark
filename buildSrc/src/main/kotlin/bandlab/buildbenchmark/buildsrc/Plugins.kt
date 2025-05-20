@@ -7,5 +7,6 @@ internal object Plugins {
     const val KOTLIN_JVM = "org.jetbrains.kotlin.jvm"
     const val KOTLIN_ANDROID = "org.jetbrains.kotlin.android"
     const val KAPT = "org.jetbrains.kotlin.kapt"
+    const val KSP = "com.google.devtools.ksp"
     const val ANVIL = "dev.zacsweers.anvil"
 }

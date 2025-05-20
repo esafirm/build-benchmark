@@ -37,3 +37,5 @@ include(":login")
 include(":login-api")
 include(":toaster")
 include(":infra")
+
+include(":codegenerator")

@@ -11,6 +11,15 @@ composeBom = "2025.05.00"
 appcompat = "1.7.0"
 material = "1.12.0"
 
+# Anvil - https://github.com/ZacSweers/anvil/releases
+anvil = "0.4.1"
+
+# Google AutoFactory - https://github.com/google/auto/releases
+google-auto-service = "1.1.1"
+
+# Google AutoFactory ksp - https://github.com/ZacSweers/auto-service-ksp/releases
+google-auto-service-ksp = "1.2.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -36,6 +45,12 @@ build-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.r
 build-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 build-anvil = { module = "dev.zacsweers.anvil:gradle-plugin", version = "0.4.1" }
 
+# compiler
+anvil-compiler-api = { module = "dev.zacsweers.anvil:compiler-api", version.ref = "anvil" }
+anvil-compiler-utils = { module = "dev.zacsweers.anvil:compiler-utils", version.ref = "anvil" }
+google-auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "google-auto-service" }
+google-auto-service-ksp = { module = "dev.zacsweers.autoservice:auto-service-ksp", version.ref = "google-auto-service-ksp" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
@@ -44,6 +59,8 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 anvil = { id = "dev.zacsweers.anvil", version = "0.4.1" }
+
+
 
 [bundles]
 feature = [
