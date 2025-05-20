@@ -8,6 +8,13 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.squareup.anvil.compiler.internal.createAnvilSpec
+import com.squareup.anvil.compiler.internal.ksp.fqName
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.ksp.kspDependencies
+import com.squareup.kotlinpoet.ksp.writeTo
 
 class CodeGenerator(
     private val env: SymbolProcessorEnvironment,
@@ -25,7 +32,40 @@ class CodeGenerator(
         resolver.getSymbolsWithAnnotation(CustomAnnotation::class.qualifiedName!!)
             .filterIsInstance<KSClassDeclaration>()
             .forEach {
-                env.logger.info("> Process ${it.qualifiedName}")
+
+                env.logger.info("""
+                    [CodeGenerator] Process
+                    
+                    toString: $it
+                    qualified: ${it.qualifiedName?.asString()}
+                    simple: ${it.simpleName.asString()}
+                    fqName: ${it.fqName}
+                """.trimIndent())
+
+                val componentName = "${it.simpleName.asString()}Impl"
+                val fileSpec = FileSpec.createAnvilSpec(
+                    packageName = it.packageName.asString(),
+                    fileName = componentName
+                ) {
+                    TypeSpec.objectBuilder(componentName)
+                        .addFunction(
+                            FunSpec.builder("log")
+                                .addCode("println(\"\$this\")")
+                                .build()
+                        )
+                        .build()
+                        .apply(::addType)
+                }
+
+                fileSpec.writeTo(
+                    codeGenerator = env.codeGenerator,
+                    dependencies = fileSpec.kspDependencies(
+                        aggregating = false,
+                        originatingKSFiles = listOf(
+                            it.containingFile ?: error("$it does not have containing file")
+                        )
+                    ),
+                )
             }
         return emptyList()
     }
