@@ -56,5 +56,9 @@ gradlePlugin {
             implementationClass = "bandlab.buildbenchmark.buildsrc.AnvilCustomPlugin"
             description = "Convention plugin for Anvil custom symbol processor"
         }
+        daggerCompilerLibPlugin {
+            id = "bandlab.buildbenchmark.dagger.compiler"
+            implementationClass = "bandlab.buildbenchmark.buildsrc.DaggerCompilerLibrary"
+        }
     }
 }

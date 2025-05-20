@@ -2,6 +2,7 @@ plugins {
     id("bandlab.buildbenchmark.androidlib")
     id("bandlab.buildbenchmark.anvil")
     id("bandlab.buildbenchmark.anvil.custom")
+    id("bandlab.buildbenchmark.dagger.compiler")
 }
 
 android {
